@@ -1,11 +1,15 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
 
 const placesRoutes = require("./routes/places-routes");
 const usersRoutes = require("./routes/users-routes");
 const HttpError = require("./models/http-error");
 
 const app = express();
+
+const DB_URL =
+  "mongodb+srv://ranjeet:G6PEjnRCVgEc9Zsx@cluster0.en7x9.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 
 app.use(bodyParser.json());
 
@@ -25,4 +29,14 @@ app.use((error, req, res, next) => {
   res.json({ message: error.message || "An unknown error occurred!" });
 });
 
-app.listen(5555);
+mongoose
+  .connect(
+    "mongodb+srv://ranjeet:G6PEjnRCVgEc9Zsx@cluster0.en7x9.mongodb.net/MERN?retryWrites=true&w=majority"
+  )
+  .then(() => {
+    app.listen(5555);
+    // console.log("Connection stablished");
+  })
+  .catch((err) => {
+    console.log(err);
+  });
