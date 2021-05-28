@@ -35,7 +35,7 @@ mongoose
   )
   .then(() => {
     app.listen(5555);
-    // console.log("Connection stablished");
+    console.log("Connection stablished");
   })
   .catch((err) => {
     console.log(err);
